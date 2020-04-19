@@ -1,0 +1,18 @@
+{
+	"totalCases": 29,
+	"totalDeath": 8,
+	"totalConfined": 19,
+	"totalRecovered": 2,
+	"pui" : {
+		"death": 10,
+		"confined": 37,
+		"recovered": 47,
+		"total": 94
+	},
+	"pum" : {
+		"quarantine": 10.398,
+		"completed": 75.949,
+		"incomplete": 334,
+		"total": "86,681"
+	}
+}

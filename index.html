@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html translate="no">
+
+<head>
+  <script src="js/analytics.js"></script>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <meta HTTP-EQUIV="Expires" CONTENT="-1">
+  <meta name="author" content="ajdeguzman" />
+  <!-- og -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ajdeguzman.github.io/pangasinan-covid19-tracker/">
+  <meta property="og:image:width" content="885">
+  <meta property="og:image:height" content="885">
+  <meta property="og:image" content="https://ajdeguzman.github.io/pangasinan-covid19-tracker/img/favicon.png">
+  <!-- og -->
+  <title>Calasiao COVID-19 Watch</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="manifest" href="img/site.webmanifest">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/shared-style.css" />
+  <link rel="stylesheet" href="css/demo-style.css" />
+  <link rel="stylesheet" type="text/css" href="css/pangasinan-map.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+  <style>
+  .tooltip-box {
+    position: absolute;
+    display: none;
+    padding: 0.25rem 0.5rem;
+    color: #fff;
+    text-align: center;
+    background-color: #000000d9;
+    border-radius: 0.25rem;
+    font-size: .75rem;
+    transition: .5s;
+  }
+
+  #cityListTable>thead>tr>th {
+    cursor: default !important;
+  }
+
+  #cityListTable>thead>tr>th[class*="sort"]:before,
+  #cityListTable>thead>tr>th[class*="sort"]:after {
+    content: "" !important;
+    display: none;
+  }
+  </style>
+</head>
+
+<body class="header-fixed">
+  <nav class="t-header">
+    <div class="t-header-brand-wrapper">
+      <a href="index.html" class="text-danger">
+        <img class="logo logo px-3" src="img/logo.svg" />
+        <div class="text-gray">
+          <p>CALASIAO</p>
+          <p>COVID-19 WATCH</p>
+        </div>
+      </a>
+    </div>
+    <div class="t-header-content-wrapper">
+      <div class="t-header-content">
+        <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-body">
+    <div id="sideBar" class="sidebar"></div>
+    <!-- partial -->
+    <div class="page-content-wrapper">
+      <!-- <div class="loading">
+        <span class="spinner-grow" role="status" aria-hidden="true"></span>
+      </div> -->
+      <div class="page-content-wrapper-inner">
+        <div class="content-viewport">
+          <div class="row">
+            <div class="col-12 pt-5 pb-3">
+              <h4><span id="asOfDate">Total Outbreaks </span></h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="container row col-12">
+              <div class="col-md-12">
+                <div class="grid">
+                  <div class="grid-body text-gray">
+                    <div class="d-flex justify-content-between">
+                      <p id="diagnoseTitle" class="card-title">Confirmed Cases <i class="far fa-hospital"></i></p>
+                    </div>
+                    <p id="totalCasesNum" class="display-4 text-danger">0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="container row col-12">
+              <div class="col-md-4 col-sm-4 col-4">
+                <div class="grid">
+                  <div class="grid-body text-gray">
+                    <div class="d-flex justify-content-between">
+                      <p id="diagnoseTitle" class="card-title">Probable <i class="far fa-hospital"></i></p>
+                    </div>
+                    <p id="totalConfinedNum" class="display-4 text-primary">0</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-4">
+                <div class="grid">
+                  <div class="grid-body text-gray">
+                    <div class="d-flex justify-content-between">
+                      <p id="totalDeathTitle" class="card-title">Suspect <i class="fas fa-skull-crossbones"></i></p>
+                    </div>
+                    <p id="totalDeathNum" class="display-4 text-danger">0</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-4">
+                <div class="grid">
+                  <div class="grid-body text-gray">
+                    <div class="d-flex justify-content-between">
+                      <p id="totalRecoveredTitle" class="card-title">Recovered <i class="fas fa-child"></i></p>
+                    </div>
+                    <p id="totalRecoveredNum" class="display-4 text-success">0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <!--  -->
+
+          <!--  -->
+          <div class="row">
+              <div class="col-12 py-3">
+                <h4>Patients Under Monitoring (PUM)</h4>
+              </div>
+            <div class="container row col-12">
+              <div class="col-md-4 col-sm-4 col-4">
+                <div class="grid">
+                  <div class="grid-body text-gray">
+                    <div class="d-flex justify-content-between">
+                      <p id="diagnoseTitle" class="card-title">Total PUMs <i class="far fa-calendar"></i></p>
+                    </div>
+                    <p id="totalPUMQuarantinedNum" class="display-4 text-danger">0 (0%)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-4">
+                <div class="grid">
+                  <div class="grid-body text-gray">
+                    <div class="d-flex justify-content-between">
+                      <p id="deadTitle" class="card-title">Completed Quarantine <i class="fas fa-calendar-check"></i></p>
+                    </div>
+                    <p id="totalPUMCompletedQuarantineNum" class="display-4 text-success">0 (0%)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-4">
+                <div class="grid">
+                  <div class="grid-body text-gray">
+                    <div class="d-flex justify-content-between">
+                      <p id="ysdDiagnoseTitle" class="card-title">Under Quarantine <i class="fas fa-calendar-times"></i></p>
+                    </div>
+                    <p id="totalPUMIncompleteQuarantineNum" class="display-4 text-danger">0 (0%)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-100">
+            <div class="card box-shadow">
+              <div class="card-header">
+                Geographical Distribution of Infections
+              </div>
+              <div class="align-items-sm-center card-body d-flex row">
+                <div class="col-sm-12 col-md-3">
+                  <table id="townListTable" class="table table-bordered table-sm table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Municipality/City</th>
+                        <th scope="col"># of cases</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+
+        </div>
+      </div>
+      <!-- partial -->
+    </div>
+    <!-- page content ends -->
+  </div>
+  <!--page body ends -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="js/layout/core.js"></script>
+  <script src="js/layout/template.js"></script>
+  <!-- <script src="js/layout/dashboard.js"></script> -->
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+  </script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script src="js/index.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $('#sideBar').load('sidebar.html');
+    $(".st1").on('mousemove', function(e) {
+      e.preventDefault();
+      offsetX = e.offsetX;
+      offsetY = e.offsetY;
+      $(".tooltip-box").css({
+        "left": offsetX - 10 + "px",
+        "top": offsetY + 20 + "px"
+      });
+    });
+    $(".st1").hover(function() {
+      cityID = $(this).attr("id").replace("tw-map-", "");
+      cName = $("#TW_" + cityID + " > th").text();
+      cNum = $("#TW_" + cityID + " > td").text();
+      // $("#tw-map-" + cityID).css({
+      //   "stroke": "#000",
+      // });
+      $(".tooltip-box").css({
+        "display": "initial",
+      }).html('<span id="city-name">' + cName + '</span>：<span id="city-case-num">' + cNum + '</span>');
+    }, function() {
+      // $("#tw-map-" + cityID).css({
+      //   "stroke": "#5F9EA0",
+      // });
+      $(".tooltip-box").css({
+        display: "none",
+      });
+    });
+  });
+  </script>
+
+</body>
+
+</html>
