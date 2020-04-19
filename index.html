@@ -11,10 +11,10 @@
   <meta name="author" content="ajdeguzman" />
   <!-- og -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ajdeguzman.github.io/pangasinan-covid19-tracker/">
+  <meta property="og:url" content="https://ajdeguzman.github.io/calasiao-covid19-watch/">
   <meta property="og:image:width" content="885">
   <meta property="og:image:height" content="885">
-  <meta property="og:image" content="https://ajdeguzman.github.io/pangasinan-covid19-tracker/img/favicon.png">
+  <meta property="og:image" content="https://ajdeguzman.github.io/calasiao-covid19-watch/img/favicon.png">
   <!-- og -->
   <title>Calasiao COVID-19 Watch</title>
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
@@ -108,9 +108,9 @@
                 <div class="grid">
                   <div class="grid-body text-gray">
                     <div class="d-flex justify-content-between">
-                      <p id="diagnoseTitle" class="card-title">Probable <i class="far fa-hospital"></i></p>
+                      <p id="probableTitle" class="card-title">Probable <i class="far fa-hospital"></i></p>
                     </div>
-                    <p id="totalConfinedNum" class="display-4 text-primary">0</p>
+                    <p id="probableNum" class="display-4 text-primary">0</p>
                   </div>
                 </div>
               </div>
@@ -118,9 +118,9 @@
                 <div class="grid">
                   <div class="grid-body text-gray">
                     <div class="d-flex justify-content-between">
-                      <p id="totalDeathTitle" class="card-title">Suspect <i class="fas fa-skull-crossbones"></i></p>
+                      <p id="suspectTitle" class="card-title">Suspect <i class="far fa-hospital"></i></p>
                     </div>
-                    <p id="totalDeathNum" class="display-4 text-danger">0</p>
+                    <p id="suspectNum" class="display-4 text-danger">0</p>
                   </div>
                 </div>
               </div>
@@ -151,7 +151,7 @@
                     <div class="d-flex justify-content-between">
                       <p id="diagnoseTitle" class="card-title">Total PUMs <i class="far fa-calendar"></i></p>
                     </div>
-                    <p id="totalPUMQuarantinedNum" class="display-4 text-danger">0 (0%)</p>
+                    <p id="totalPUMNum" class="display-4 text-danger">0 (0%)</p>
                   </div>
                 </div>
               </div>
@@ -171,7 +171,7 @@
                     <div class="d-flex justify-content-between">
                       <p id="ysdDiagnoseTitle" class="card-title">Under Quarantine <i class="fas fa-calendar-times"></i></p>
                     </div>
-                    <p id="totalPUMIncompleteQuarantineNum" class="display-4 text-danger">0 (0%)</p>
+                    <p id="totalPUMUnderQuarantineNum" class="display-4 text-danger">0 (0%)</p>
                   </div>
                 </div>
               </div>
@@ -180,14 +180,14 @@
           <div class="w-100">
             <div class="card box-shadow">
               <div class="card-header">
-                Geographical Distribution of Infections
+                Total PUMs Per Barangay
               </div>
               <div class="align-items-sm-center card-body d-flex row">
                 <div class="col-sm-12 col-md-3">
                   <table id="townListTable" class="table table-bordered table-sm table-hover">
                     <thead>
                       <tr>
-                        <th scope="col">Municipality/City</th>
+                        <th scope="col">Barangay</th>
                         <th scope="col"># of cases</th>
                       </tr>
                     </thead>
